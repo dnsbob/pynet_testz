@@ -3,9 +3,17 @@
 
 import telnetlib
 import time
+import socket
+import sys
 
 TELNET_PORT=23
 TELNET_TIMEOUT=6
+
+def telnet_connect(ip_addr, TELNET_PORT, TELNET_TIMEOUT):
+    try:
+        return telnetlib.Telnet(ip_addr, TELNET_PORT, TELNET_TIMEOUT)
+    except socket.timeout:
+        sys.exit("Connection timed out")
 
 def login(remote_conn, username, password):
     output=remote_conn.read_until("sername:", TELNET_TIMEOUT)
@@ -25,7 +33,8 @@ def main():
     username='pyclass'
     password='88newclass'
 
-    remote_conn=telnetlib.Telnet(ip_addr, TELNET_PORT, TELNET_TIMEOUT)
+    remote_conn=telnet_connect(ip_addr, TELNET_PORT, TELNET_TIMEOUT)
+    
     output=login(remote_conn, username, password)
     print output
 
