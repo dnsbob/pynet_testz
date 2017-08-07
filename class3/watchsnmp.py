@@ -1,6 +1,5 @@
 ''' watchsnmp.py
 
-functions
 set snmp device(s) to monitor
 set snmp oid list to monitor
 get snmp info from devices using oid list
@@ -11,21 +10,29 @@ graph snmp data
 send alert email
 '''
 
-''' thoughts
-save initial value and diffs (needed to graph)
-or raw data ?
-or both ?
-
-'''
-
 from snmp_helper import snmp_get_oid_v3,snmp_extract
 
-class WatchSnmp(object):
+ip='184.105.247.71'
+port=161
+devicename='pynet-rtr2'
+device=(ip,port)
+a_user='pysnmp'
+auth_key='galileo1'
+encrypt_key='galileo1'
+snmp_user=(a_user, auth_key, encrypt_key)
+
+oidlist=[
+
+]
+
+class WatchSnmp(WatchData):
     ''' data structures:
         oid_nums [oid1, oid2, ...]
         oid_names [oid1name, oid2name, ...]
         oid_sets [ [oid1name, oid1], [oid2name, oid2], ...]
         Uses the "WatchData" class
+        polltime (single value in seconds)
+        device IP list
         Note that first reading is the initial values,
         not graphed or reported if using differences
     '''
@@ -49,13 +56,18 @@ class WatchSnmp(object):
         '''
 
 ''' skip
-class WatchSnmp(object):
     def __init__(self,device_ip_list,oid_list):
         self.device_ip_list=device_ip_list
         self.oid_list=oid_list
         
     def 
 '''
+
+devicelist=[
+('pynet-rtr2', '184.105.247.71')
+]
+ip='184.105.247.71'
+devicename='pynet-rtr2'
 
 def test():
     ''' test of WatchSnmp '''
