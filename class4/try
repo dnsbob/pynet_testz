@@ -1,0 +1,157 @@
+Script started on Wed 16 Aug 2017 12:25:27 PM PDT
+]0;bharold@ip-172-30-0-53:~/pynet_testz/class4[?1034h(py27_venv)(py27_venv)[bharold@ip-172-30-0-53 class4]$ ls
+[0m[01;32mparamiko_w4e1.py[0m  [01;32mparamiko_w4e2.py[0m  [01;32mpexpect_ex.py[0m  [01;32mpexpect_w4e3.py[0m  try
+]0;bharold@ip-172-30-0-53:~/pynet_testz/class4(py27_venv)(py27_venv)[bharold@ip-172-30-0-53 class4]$ ./pexpect_w4e3.py
+Password: 
+The authenticity of host '184.105.247.71 (184.105.247.71)' can't be established.
+RSA key fingerprint is 0a:6e:9e:2b:f3:9f:1e:f0:a3:f2:1a:ab:76:8c:b0:46.
+Are you sure you want to continue connecting (yes/no)? Traceback (most recent call last):
+  File "./pexpect_w4e3.py", line 31, in <module>
+    main()
+  File "./pexpect_w4e3.py", line 19, in main
+    ssh_conn.expect('ssword:')
+  File "/home/bharold/VENV/py27_venv/local/lib/python2.7/site-packages/pexpect/spawnbase.py", line 321, in expect
+    timeout, searchwindowsize, async)
+  File "/home/bharold/VENV/py27_venv/local/lib/python2.7/site-packages/pexpect/spawnbase.py", line 345, in expect_list
+    return exp.expect_loop(timeout)
+  File "/home/bharold/VENV/py27_venv/local/lib/python2.7/site-packages/pexpect/expect.py", line 107, in expect_loop
+    return self.timeout(e)
+  File "/home/bharold/VENV/py27_venv/local/lib/python2.7/site-packages/pexpect/expect.py", line 70, in timeout
+    raise TIMEOUT(msg)
+pexpect.exceptions.TIMEOUT: Timeout exceeded.
+<pexpect.pty_spawn.spawn object at 0x7f123c4b1950>
+command: /usr/bin/ssh
+args: ['/usr/bin/ssh', '-l', 'pyclass', '184.105.247.71', '-p', '22']
+buffer (last 100 chars): ':9e:2b:f3:9f:1e:f0:a3:f2:1a:ab:76:8c:b0:46.\r\nAre you sure you want to continue connecting (yes/no)? '
+before (last 100 chars): ':9e:2b:f3:9f:1e:f0:a3:f2:1a:ab:76:8c:b0:46.\r\nAre you sure you want to continue connecting (yes/no)? '
+after: <class 'pexpect.exceptions.TIMEOUT'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: False
+pid: 28102
+child_fd: 5
+closed: False
+timeout: 3
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: <open file '<stdout>', mode 'w' at 0x7f123c5ac150>
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile("ssword:")
+]0;bharold@ip-172-30-0-53:~/pynet_testz/class4(py27_venv)(py27_venv)[bharold@ip-172-30-0-53 class4]$ 
+]0;bharold@ip-172-30-0-53:~/pynet_testz/class4(py27_venv)(py27_venv)[bharold@ip-172-30-0-53 class4]$ 
+]0;bharold@ip-172-30-0-53:~/pynet_testz/class4(py27_venv)(py27_venv)[bharold@ip-172-30-0-53 class4]$ 
+]0;bharold@ip-172-30-0-53:~/pynet_testz/class4(py27_venv)(py27_venv)[bharold@ip-172-30-0-53 class4]$ 
+]0;bharold@ip-172-30-0-53:~/pynet_testz/class4(py27_venv)(py27_venv)[bharold@ip-172-30-0-53 class4]$ 
+]0;bharold@ip-172-30-0-53:~/pynet_testz/class4(py27_venv)(py27_venv)[bharold@ip-172-30-0-53 class4]$ ./pexpect_w4e3.pyls[K./pexpect_w4e3.py
+Password: 
+Password: 88newclass
+
+pynet-rtr2#terminal length 0
+terminal length 0
+pynet-rtr2#show ip int brief
+show ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+FastEthernet0              unassigned      YES unset  down                  down    
+FastEthernet1              unassigned      YES unset  down                  down    
+FastEthernet2              unassigned      YES unset  down                  down    
+FastEthernet3              unassigned      YES unset  down                  down    
+FastEthernet4              10.220.88.21    YES NVRAM  up                    up      
+Vlan1                      unassigned      YES unset  down                  down    
+pynet-rtr2#show ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+FastEthernet0              unassigned      YES unset  down                  down    
+FastEthernet1              unassigned      YES unset  down                  down    
+FastEthernet2              unassigned      YES unset  down                  down    
+FastEthernet3              unassigned      YES unset  down                  down    
+FastEthernet4              10.220.88.21    YES NVRAM  up                    up      
+Vlan1                      unassigned      YES unset  down                  down    
+pynet-rtr2
+]0;bharold@ip-172-30-0-53:~/pynet_testz/class4(py27_venv)(py27_venv)[bharold@ip-172-30-0-53 class4]$ 
+]0;bharold@ip-172-30-0-53:~/pynet_testz/class4(py27_venv)(py27_venv)[bharold@ip-172-30-0-53 class4]$ cat pexpect_w4e3.py
+#!/usr/bin/env python
+
+import pexpect
+from getpass import getpass
+import re
+import time
+import sys
+
+def main():
+	username='pyclass'
+	#ip_addr=raw_input("enter ip: ")
+        ip_addr='184.105.247.71'
+	port = 22
+	password = getpass()
+
+        ssh_conn = pexpect.spawn('ssh -l {} {} -p {}'.format(username, ip_addr, port))
+        ssh_conn.logfile = sys.stdout  # for debugging
+        ssh_conn.timeout=3
+        ssh_conn.expect('ssword:')
+        ssh_conn.sendline(password)   # automatically adds newline
+        ssh_conn.expect('#')
+
+        ssh_conn.sendline('terminal length 0')
+        ssh_conn.expect('#')
+
+        ssh_conn.sendline('show ip int brief')
+        ssh_conn.expect('#')
+        print ssh_conn.before
+
+if __name__ == "__main__":
+	main()
+
+]0;bharold@ip-172-30-0-53:~/pynet_testz/class4(py27_venv)(py27_venv)[bharold@ip-172-30-0-53 class4]$ 
+]0;bharold@ip-172-30-0-53:~/pynet_testz/class4(py27_venv)(py27_venv)[bharold@ip-172-30-0-53 class4]$ 
+]0;bharold@ip-172-30-0-53:~/pynet_testz/class4(py27_venv)(py27_venv)[bharold@ip-172-30-0-53 class4]$ ls
+[0m[01;32mparamiko_w4e1.py[0m  [01;32mparamiko_w4e2.py[0m  [01;32mpexpect_ex.py[0m  [01;32mpexpect_w4e3.py[0m  try
+]0;bharold@ip-172-30-0-53:~/pynet_testz/class4(py27_venv)(py27_venv)[bharold@ip-172-30-0-53 class4]$ cp pexpect_w4e3.py pexpect_w4e3.py[1P.py4.py
+]0;bharold@ip-172-30-0-53:~/pynet_testz/class4(py27_venv)(py27_venv)[bharold@ip-172-30-0-53 class4]$ vi pexpect_w4e4.py
+[?1049h[?1h=[?2004h[2;1H▽[6n[2;1H  [1;1H[1;47r[?12;25h[?12l[?25h[27m[m[37m[40m[H[2J[?25l[47;1H"pexpect_w4e4.py" 32L, 754C[>c[1;1H[1m[33m  1 [m[37m[40m[36m#!/usr/bin/env python[m[37m[40m
+[1m[33m  2 
+  3 import[m[37m[40m pexpect
+[1m[33m  4 from[m[37m[40m getpass [1m[33mimport[m[37m[40m getpass
+[1m[33m  5 import[m[37m[40m re
+[1m[33m  6 import[m[37m[40m time
+[1m[33m  7 import[m[37m[40m sys
+[1m[33m  8 
+  9 [m[37m[40m[1m[37mdef[m[37m[40m [1m[32mmain[m[37m[40m():
+[1m[33m 10 [m[37m[40m[8Cusername=[1m[36m'pyclass'[m[37m[40m
+[1m[33m 11 [m[37m[40m[8C[36m#ip_addr=raw_input("enter ip: ")[m[37m[40m
+[1m[33m 12 [m[37m[40m[8Cip_addr=[1m[36m'184.105.247.71'[m[37m[40m
+[1m[33m 13 [m[37m[40m[8Cport = [1m[36m22[m[37m[40m
+[1m[33m 14 [m[37m[40m[8Cpassword = getpass()
+[1m[33m 15 
+ 16 [m[37m[40m[8Cssh_conn = pexpect.spawn([1m[36m'ssh -l {} {} -p {}'[m[37m[40m.format(username, ip_addr, port))
+[1m[33m 17 [m[37m[40m[8Cssh_conn.logfile = sys.stdout  [36m# for debugging[m[37m[40m
+[1m[33m 18 [m[37m[40m[8Cssh_conn.timeout=[1m[36m3[m[37m[40m
+[1m[33m 19 [m[37m[40m[8Cssh_conn.expect([1m[36m'ssword:'[m[37m[40m)
+[1m[33m 20 [m[37m[40m[8Cssh_conn.sendline(password)   [36m# automatically adds newline[m[37m[40m
+[1m[33m 21 [m[37m[40m[8Cssh_conn.expect([1m[36m'#'[m[37m[40m)
+[1m[33m 22 
+ 23 [m[37m[40m[8Cssh_conn.sendline([1m[36m'terminal length 0'[m[37m[40m)
+[1m[33m 24 [m[37m[40m[8Cssh_conn.expect([1m[36m'#'[m[37m[40m)
+[1m[33m 25 
+ 26 [m[37m[40m[8Cssh_conn.sendline([1m[36m'show ip int brief'[m[37m[40m)
+[1m[33m 27 [m[37m[40m[8Cssh_conn.expect([1m[36m'#'[m[37m[40m)
+[1m[33m 28 [m[37m[40m[8C[1m[32mprint[m[37m[40m ssh_conn.before
+[1m[33m 29 
+ 30 [m[37m[40m[1m[37mif[m[37m[40m __name__ == [1m[36m"__main__"[m[37m[40m:
+[1m[33m 31 [m[37m[40m[8Cmain()
+[1m[33m 32 [m[37m[40m
+[1m[34m~                                                                                                           [34;1H~                                                                                                           [35;1H~                                                                                                           [36;1H~                                                                                                           [37;1H~                                                                                                           [38;1H~                                                                                                           [39;1H~                                                                                                           [40;1H~                                                                                                           [41;1H~                                                                                                           [42;1H~                                                                                                           [43;1H~                                                                                                           [44;1H~                                                                                                           [45;1H~                                                                                                           [46;1H~                                                                                                           [m[37m[40m[47;91H1,1[11CAll[1;5H[?12l[?25hP+q436f\P+q6b75\P+q6b64\P+q6b72\P+q6b6c\P+q2332\P+q2334\P+q2569\P+q2a37\P+q6b31\[?25l[47;91H2,0-1[2;5H[?12l[?25h[?25l[47;91H3,1  [3;5H[?12l[?25h[?25l[47;91H4[4;5H[?12l[?25h[?25l[47;91H5[5;5H[?12l[?25h[?25l[47;91H6[6;5H[?12l[?25h[?25l[47;91H7[7;5H[?12l[?25h[?25l[47;91H8,0-1[8;5H[?12l[?25h[?25l[47;91H9,1  [9;5H[?12l[?25h[?25l[47;91H10,2-9[10;13H[?12l[?25h[?25l[47;92H1[11;13H[?12l[?25h[?25l[47;92H2,9  [12;13H[?12l[?25h[?25l[47;92H3,2-9[13;13H[?12l[?25h[?25l[47;92H4[14;13H[?12l[?25h[?25l[47;92H5,0-1[15;5H[?12l[?25h[?25l[47;92H6,9  [16;13H[?12l[?25h[?25l[47;92H7[17;13H[?12l[?25h[?25l[47;92H8[18;13H[?12l[?25h[?25l[47;92H9[19;13H[?12l[?25h[?25l[47;91H20[20;13H[?12l[?25h[?25l[47;92H1[21;13H[?12l[?25h[?25l[47;92H2,0-1[22;5H[?12l[?25h[?25l[47;92H3,9  [23;13H[?12l[?25h[?25l[47;92H4[24;13H[?12l[?25h[?25l[47;92H5,0-1[25;5H[?12l[?25h[?25l[47;92H6,9  [26;13H[?12l[?25h
+Broadcast message from gituser@ip-172-30-0-53
+	(unknown) at 12:30 ...
+
+The system is going down for reboot in 10 minutes!
+Applying system patches 
+[47;1H[47;1H[K[47;1H[?2004l[?1l>[?1049l]0;bharold@ip-172-30-0-53:~/pynet_testz/class4(py27_venv)(py27_venv)[bharold@ip-172-30-0-53 class4]$ exit
+
+Script done on Wed 16 Aug 2017 12:30:42 PM PDT
