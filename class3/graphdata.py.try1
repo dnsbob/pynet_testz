@@ -1,0 +1,94 @@
+''' graphdata.py 
+
+graph the data collected in watchdata.py
+used by programs like watchsnmp.py
+
+auto-gen the x axis from the timestamps
+'''
+
+import pickle
+import time
+import pygal
+import json
+
+def debug(msg):
+    if debugflag:
+        print("Debug: " + msg)
+
+filename='snmpdata.dat'
+outfile=filename + ".svg"
+debugflag=True
+jsonfile='graphdata.json'
+
+# open json file
+f2=open(jsonfile,"w")
+
+# read file
+try:
+    f=open(filename,'rb')
+except IOError:
+    raise IOError('error - file is not readable')
+try:
+    var_list=pickle.load(f)
+    diff=pickle.load(f)
+    initial=pickle.load(f)
+except EOFError:
+    raise ValueError('error - file exists but no proper header')
+data=[]
+while True:
+    try:
+        datarow=pickle.load(f)
+        data.append(datarow)
+    except EOFError:
+        break
+
+# calc x axis labels as hours and minutes
+xlabels=[]
+for datarow in data:
+    timestamp=datarow[0]
+    ##print timestamp
+    rowtimestruct=time.strptime(timestamp,'%Y/%m/%d %H:%M:%S')
+    rowhrmin=time.strftime('%H:%M',rowtimestruct)
+    ##print rowhrmin
+    xlabels.append(rowhrmin)
+
+line_chart = pygal.Line()
+title='Input/Output Packets and Bytes'
+line_chart.title = title
+json.dump(title,f2)
+debug('xlabels: {}'.format(xlabels))
+json.dump(xlabels,f2)
+line_chart.x_labels = xlabels
+# get data for each variable
+# only numeric data that can be graphed
+for i in [1]:  ## debug
+##for i in range(len(var_list)):
+    debug('variable number {}'.format(i)) 
+    varobj=var_list[i]
+    if type(varobj) == 'str':
+        varname=varobj
+    else:
+        varname=varobj[0]
+    debug('varname {}'.format(varname))
+    numflag=True
+    graphdata=[]
+    for datarow in data:
+        datastring=datarow[i+1]  # offset by one due to timestamp
+        ##debug('varnum {}, varname {}, datastring {}'.format(i,varname,datastring))
+        try:
+            value=float(datastring)
+            value=(float(datastring) - 1949433248) / 1000 ## debug
+        except ValueError:
+            numflag=False
+            debug('non-numeric data, skipping: {}'.format(datastring))
+            break
+        graphdata.append(value)
+    if numflag:
+        debug('graphdata: {}'.format(graphdata))
+        line_chart(varname, graphdata)
+        json.dump(varname,f2)
+        json.dump(graphdata,f2)
+
+# generate graph
+line_chart.render_to_file(outfile)
+print "download and view " + outfile + " in web browser"

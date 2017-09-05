@@ -13,7 +13,6 @@ send alert email
 from snmp_helper import snmp_get_oid_v3,snmp_extract
 from watchdata import WatchData
 import time
-from pprint import pprint
 
 ip='184.105.247.70'
 port=161
@@ -26,7 +25,6 @@ snmp_user=(a_user, auth_key, encrypt_key)
 filename='snmpdata.dat'
 polltime=300
 endtime=3600
-#debugflag=False
 debugflag=True
 
 oidlist=[
@@ -49,7 +47,6 @@ oidlist=[
 '''
 def debug(msg):
     if debugflag:
-        ##print type(msg)
         print("Debug: " + msg)
 
 watchobj=WatchData(filename,oidlist,debugflag=debugflag)
@@ -62,11 +59,9 @@ while timer <= endtime:
     for (oidname,oid) in oidlist:
         snmp_data=snmp_get_oid_v3(device,snmp_user, oid)
         data=snmp_extract(snmp_data)
-        debug( "valuelist before: {}".format(valuelist))
+        debug( "valuelist before:")
+        debug( valuelist)
         debug( oidname + "  " + oid + "  " + data)
         valuelist.append(data)
     watchobj.add(valuelist)
     time.sleep(polltime)
-    timer += polltime
-    ##print type(timer)
-    debug('timer: {}'.format(timer))
